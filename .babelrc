@@ -1,0 +1,8 @@
+{
+  "presets": ["es2015-loose", "react"],
+  "plugins": [
+    "add-module-exports",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ]
+}

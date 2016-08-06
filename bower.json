@@ -1,0 +1,20 @@
+{
+  "name": "purescript-recompose",
+  "version": "1.0.0",
+  "description": "PureScript bindings for acdlite/recompose using purescript-react",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-react": "^1.1.0"
+  },
+  "devDependencies": {
+    "purescript-debug": "^1.0.0"
+  }
+}
