@@ -17,13 +17,11 @@ module Recompose
   , shouldUpdate
   , pure
   , onlyUpdateForKeys
-  , onlyUpdateForPropTypes
   , withContext
   , getContext
   , lifecycle
   , toClass
   , setStatic
-  , setPropTypes
   , setDisplayName
   , getDisplayName
   , wrapDisplayName
@@ -35,80 +33,88 @@ module Recompose
 import Data.Function.Uncurried (Fn2)
 import React (ReactClass, ReactElement)
 
-type ReactFunctionalComponent = forall props. props -> ReactElement
-type HigherOrderComponent = forall props.
-  ReactClass props -> ReactFunctionalComponent
+type ReactFunctionalComponent props = props -> ReactElement
+
+type HigherOrderComponent ownerProps props =
+  ReactFunctionalComponent ownerProps -> ReactFunctionalComponent props
 
 foreign import mapProps :: forall ownerProps props.
-  (ownerProps -> props) -> HigherOrderComponent
+  (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
 foreign import withProps :: forall ownerProps props.
-  (ownerProps -> props) -> HigherOrderComponent
+  (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
 foreign import withPropsOnChange :: forall ownerProps props.
-  Array String -> (ownerProps -> props) -> HigherOrderComponent
+  Array String -> (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
-foreign import withHandlers :: forall handlerCreators.
-  handlerCreators -> HigherOrderComponent
+foreign import withHandlers :: forall props handlerCreators.
+  handlerCreators -> HigherOrderComponent props props
 
-foreign import defaultProps :: forall props. props -> HigherOrderComponent
+foreign import defaultProps :: forall props.
+  props -> HigherOrderComponent props props
 
-foreign import renameProp :: String -> String -> HigherOrderComponent
+foreign import renameProp :: forall props.
+  String -> String -> HigherOrderComponent props props
 
-foreign import renameProps :: forall nameMap. nameMap -> HigherOrderComponent
+foreign import renameProps :: forall props nameMap.
+  nameMap -> HigherOrderComponent props props
 
-foreign import flattenProp :: String -> HigherOrderComponent
+foreign import flattenProp :: forall props.
+  String -> HigherOrderComponent props props
 
-foreign import withState :: forall initialState props.
-  String -> String -> (props -> initialState) -> HigherOrderComponent
+foreign import withState :: forall props initialState.
+  String -> String -> (props -> initialState) ->
+  HigherOrderComponent props props
 
-foreign import withReducer :: forall state action.
-  String -> String -> (Fn2 state action state) -> state -> HigherOrderComponent
+foreign import withReducer :: forall props state action.
+  String -> String -> (Fn2 state action state) -> state ->
+  HigherOrderComponent props props
 
 foreign import branch :: forall props.
-  (props -> Boolean) -> HigherOrderComponent -> HigherOrderComponent ->
-  HigherOrderComponent
+  (props -> Boolean) -> HigherOrderComponent props props ->
+  HigherOrderComponent props props -> HigherOrderComponent props props
 
 foreign import renderComponent :: forall props.
-  ReactClass props -> HigherOrderComponent
+  ReactClass props -> HigherOrderComponent props props
 
-foreign import renderNothing :: HigherOrderComponent
+foreign import renderNothing :: forall props. HigherOrderComponent props props
 
-foreign import shouldUpdate :: forall props nextProps.
-  (Fn2 props nextProps Boolean) -> HigherOrderComponent
+foreign import shouldUpdate :: forall props.
+  (Fn2 props props Boolean) -> HigherOrderComponent props props
 
-foreign import pure :: HigherOrderComponent
+foreign import pure :: forall props. HigherOrderComponent props props
 
-foreign import onlyUpdateForKeys :: Array String -> HigherOrderComponent
-
-foreign import onlyUpdateForPropTypes :: HigherOrderComponent
+foreign import onlyUpdateForKeys :: forall props.
+  Array String -> HigherOrderComponent props props
 
 foreign import withContext :: forall props childContextTypes childContext.
-  childContextTypes -> (props -> childContext) -> HigherOrderComponent
+  childContextTypes -> (props -> childContext) ->
+  HigherOrderComponent props props
 
-foreign import getContext :: forall contextTypes.
-  contextTypes -> HigherOrderComponent
+foreign import getContext :: forall props contextTypes.
+  contextTypes -> HigherOrderComponent props props
 
-foreign import lifecycle :: forall spec. spec -> HigherOrderComponent
+foreign import lifecycle :: forall props spec.
+  spec -> HigherOrderComponent props props
 
-foreign import toClass :: HigherOrderComponent
+foreign import toClass :: forall props. HigherOrderComponent props props
 
-foreign import setStatic :: forall value.
-  String -> value -> HigherOrderComponent
+foreign import setStatic :: forall props value.
+  String -> value -> HigherOrderComponent props props
 
-foreign import setPropTypes :: forall propTypes.
-  propTypes -> HigherOrderComponent
-
-foreign import setDisplayName :: String -> HigherOrderComponent
+foreign import setDisplayName :: forall props.
+  String -> HigherOrderComponent props props
 
 foreign import getDisplayName :: forall component. component -> String
 
 foreign import wrapDisplayName :: forall component.
   component -> String -> String
 
-foreign import componentFromProp :: String -> ReactFunctionalComponent
+foreign import componentFromProp :: forall props.
+  String -> ReactFunctionalComponent props
 
 foreign import nest :: forall component props.
   Array component -> ReactClass props
 
-foreign import hoistStatics :: HigherOrderComponent -> HigherOrderComponent
+foreign import hoistStatics :: forall props.
+  HigherOrderComponent props props -> HigherOrderComponent props props

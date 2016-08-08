@@ -62,8 +62,6 @@ exports.pure = recompose.pure
 
 exports.onlyUpdateForKeys = recompose.onlyUpdateForKeys
 
-exports.onlyUpdateForPropTypes = recompose.onlyUpdateForPropTypes
-
 exports.withContext = function (childContextTypes) {
   return function (getChildContext) {
     return recompose.withContext(childContextTypes, getChildContext)
@@ -81,8 +79,6 @@ exports.setStatic = function (key) {
     return recompose.setStatic(key, value)
   }
 }
-
-exports.setPropTypes = recompose.setPropTypes
 
 exports.setDisplayName = recompose.setDisplayName
 
