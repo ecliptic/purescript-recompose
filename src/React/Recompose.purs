@@ -1,6 +1,5 @@
-module Recompose
-  ( ReactFunctionalComponent
-  , HigherOrderComponent
+module React.Recompose
+  ( HigherOrderComponent
   , mapProps
   , withProps
   , withPropsOnChange
@@ -33,22 +32,20 @@ module Recompose
 import Data.Function.Uncurried (Fn2)
 import React (ReactClass, ReactElement)
 
-type ReactFunctionalComponent props = props -> ReactElement
+type HigherOrderComponent props ownerProps =
+  ReactClass props -> ReactClass ownerProps
 
-type HigherOrderComponent ownerProps props =
-  ReactFunctionalComponent ownerProps -> ReactFunctionalComponent props
+foreign import mapProps :: forall props ownerProps.
+  (ownerProps -> props) -> HigherOrderComponent props ownerProps
 
-foreign import mapProps :: forall ownerProps props.
-  (ownerProps -> props) -> HigherOrderComponent ownerProps props
+foreign import withProps :: forall props ownerProps.
+  (ownerProps -> props) -> HigherOrderComponent props ownerProps
 
-foreign import withProps :: forall ownerProps props.
-  (ownerProps -> props) -> HigherOrderComponent ownerProps props
+foreign import withPropsOnChange :: forall props ownerProps.
+  Array String -> (ownerProps -> props) -> HigherOrderComponent props ownerProps
 
-foreign import withPropsOnChange :: forall ownerProps props.
-  Array String -> (ownerProps -> props) -> HigherOrderComponent ownerProps props
-
-foreign import withHandlers :: forall props handlerCreators.
-  handlerCreators -> HigherOrderComponent props props
+foreign import withHandlers :: forall props ownerProps handlerCreators.
+  handlerCreators -> HigherOrderComponent props ownerProps
 
 foreign import defaultProps :: forall props.
   props -> HigherOrderComponent props props
@@ -111,7 +108,7 @@ foreign import wrapDisplayName :: forall component.
   component -> String -> String
 
 foreign import componentFromProp :: forall props.
-  String -> ReactFunctionalComponent props
+  String -> ReactClass props
 
 foreign import nest :: forall component props.
   Array component -> ReactClass props
