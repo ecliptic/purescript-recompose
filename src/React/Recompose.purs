@@ -30,22 +30,22 @@ module React.Recompose
   ) where
 
 import Data.Function.Uncurried (Fn2)
-import React (ReactClass, ReactElement)
+import React (ReactClass)
 
-type HigherOrderComponent props ownerProps =
+type HigherOrderComponent ownerProps props =
   ReactClass props -> ReactClass ownerProps
 
-foreign import mapProps :: forall props ownerProps.
-  (ownerProps -> props) -> HigherOrderComponent props ownerProps
+foreign import mapProps :: forall ownerProps props.
+  (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
-foreign import withProps :: forall props ownerProps.
-  (ownerProps -> props) -> HigherOrderComponent props ownerProps
+foreign import withProps :: forall ownerProps props.
+  (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
-foreign import withPropsOnChange :: forall props ownerProps.
-  Array String -> (ownerProps -> props) -> HigherOrderComponent props ownerProps
+foreign import withPropsOnChange :: forall ownerProps props.
+  Array String -> (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
-foreign import withHandlers :: forall props ownerProps handlerCreators.
-  handlerCreators -> HigherOrderComponent props ownerProps
+foreign import withHandlers :: forall ownerProps props handlerCreators.
+  handlerCreators -> HigherOrderComponent ownerProps props
 
 foreign import defaultProps :: forall props.
   props -> HigherOrderComponent props props
@@ -88,8 +88,8 @@ foreign import withContext :: forall props childContextTypes childContext.
   childContextTypes -> (props -> childContext) ->
   HigherOrderComponent props props
 
-foreign import getContext :: forall props contextTypes.
-  contextTypes -> HigherOrderComponent props props
+foreign import getContext :: forall ownerProps props contextTypes.
+  contextTypes -> HigherOrderComponent ownerProps props
 
 foreign import lifecycle :: forall props spec.
   spec -> HigherOrderComponent props props
