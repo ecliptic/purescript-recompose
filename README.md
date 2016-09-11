@@ -2,6 +2,7 @@
 
 [![Latest release](https://img.shields.io/npm/v/purescript-recompose.svg)](https://github.com/ecliptic/purescript-recompose/releases)
 [![Latest release](https://img.shields.io/bower/v/purescript-recompose.svg)](https://github.com/ecliptic/purescript-recompose/releases)
+[![recompose channel on discord](https://img.shields.io/badge/discord-%23redux%20%40%20reactiflux-61dafb.svg?style=flat-square)](https://discord.gg/2PCKqHc)
 [![Build Status](https://travis-ci.org/ecliptic/purescript-recompose.svg?branch=master)](https://travis-ci.org/ecliptic/purescript-recompose)
 
 A PureScript interface to [recompose](https://github.com/acdlite/recompose), a “React utility belt for functional components and higher-order components”. Recompose provides a great way to access React’s features in a more functional way, and it defines many useful higher-order components for easy composition.
