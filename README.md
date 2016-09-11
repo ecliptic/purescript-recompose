@@ -1,5 +1,6 @@
 # purescript-recompose
 
+[![Latest release](https://img.shields.io/npm/v/purescript-recompose.svg)](https://github.com/ecliptic/purescript-recompose/releases)
 [![Latest release](https://img.shields.io/bower/v/purescript-recompose.svg)](https://github.com/ecliptic/purescript-recompose/releases)
 [![Build Status](https://travis-ci.org/ecliptic/purescript-recompose.svg?branch=master)](https://travis-ci.org/ecliptic/purescript-recompose)
 
