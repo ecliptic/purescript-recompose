@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bkonkle/purescript-recompose.git"
+    "url": "git@github.com:ecliptic/purescript-recompose.git"
   },
   "author": "Brandon Konkle <brandon@konkle.us>",
   "license": "MIT",

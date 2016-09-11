@@ -2,9 +2,9 @@
 
 A PureScript interface to [recompose](https://github.com/acdlite/recompose), a “React utility belt for functional components and higher-order components”. Recompose provides a great way to access React’s features in a more functional way, and it defines many useful higher-order components for easy composition.
 
-* [`purescript-recompose` API documentation]
+* [`purescript-recompose` API documentation](https://github.com/ecliptic/purescript-recompose/blob/master/docs/React/Recompose.md)
 * [Original `recompose` API documentation](https://github.com/acdlite/recompose/blob/master/docs/API.md)
-* [Example TodoMVC implementation](https://github.com/bkonkle/purescript-recompose-todomvc)
+* [Example TodoMVC implementation](https://github.com/ecliptic/purescript-recompose-todomvc)
 
 ## Usage
 
@@ -18,7 +18,7 @@ Compose with your existing components:
 newTodo :: ReactClass Unit
 newTodo = withHandlers handlers $ myComponent
   where handlers = { addTodo }
-  
+
 type HandleAdd props eff =
   { add :: String -> Eff eff Unit | props } ->
   { target :: { value :: String } } ->
