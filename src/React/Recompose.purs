@@ -9,6 +9,7 @@ module React.Recompose
   , renameProps
   , flattenProp
   , withState
+  , withState'
   , withReducer
   , branch
   , renderComponent
@@ -29,6 +30,7 @@ module React.Recompose
   , hoistStatics
   ) where
 
+import Prelude
 import Data.Function.Uncurried (Fn2)
 import React (ReactClass)
 
@@ -44,8 +46,8 @@ foreign import withProps :: forall ownerProps props.
 foreign import withPropsOnChange :: forall ownerProps props.
   Array String -> (ownerProps -> props) -> HigherOrderComponent ownerProps props
 
-foreign import withHandlers :: forall ownerProps props handlerCreators.
-  handlerCreators -> HigherOrderComponent ownerProps props
+foreign import withHandlers :: forall ownerProps props handlers.
+  Record handlers -> HigherOrderComponent ownerProps props
 
 foreign import defaultProps :: forall props.
   props -> HigherOrderComponent props props
@@ -59,9 +61,15 @@ foreign import renameProps :: forall props nameMap.
 foreign import flattenProp :: forall props.
   String -> HigherOrderComponent props props
 
-foreign import withState :: forall props initialState.
+foreign import withState :: forall ownerProps props initialState.
   String -> String -> (props -> initialState) ->
-  HigherOrderComponent props props
+  HigherOrderComponent ownerProps props
+
+-- | A version of withState that takes an initial state rather than a function
+withState' :: forall ownerProps props initialState.
+  String -> String -> initialState -> HigherOrderComponent ownerProps props
+withState' stateName stateUpdaterName =
+  withState stateName stateUpdaterName <<< const
 
 foreign import withReducer :: forall props state action.
   String -> String -> (Fn2 state action state) -> state ->
