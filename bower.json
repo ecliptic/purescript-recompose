@@ -13,10 +13,10 @@
   ],
   "dependencies": {
     "recompose": "acdlite/recompose#0.20.2",
-    "purescript-react": "^1.1.0",
-    "purescript-functions": "^1.0.0"
+    "purescript-react": "^2.0.0",
+    "purescript-functions": "^2.0.0"
   },
   "devDependencies": {
-    "purescript-debug": "^1.0.0"
+    "purescript-debug": "^2.0.0"
   }
 }
