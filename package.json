@@ -1,6 +1,6 @@
 {
   "name": "purescript-recompose",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "PureScript bindings for acdlite/recompose using purescript-react",
   "scripts": {
     "build": "npm run build:ps",
